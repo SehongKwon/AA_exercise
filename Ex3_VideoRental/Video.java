@@ -55,11 +55,11 @@ public class Video {
 		this.rented = rented;
 	}
 
-	public Date getRegisteredDate() {
+	public Date getRegisteredDate() { // kj85.kim: dead code
 		return registeredDate;
 	}
 
-	public void setRegisteredDate(Date registeredDate) {
+	public void setRegisteredDate(Date registeredDate) { // kj85.kim: dead code
 		this.registeredDate = registeredDate;
 	}
 

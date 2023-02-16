@@ -20,7 +20,7 @@ public class VRUI {
 			int command = ui.showCommand() ;
 			switch ( command ) {
 				case 0: quit = true ; break ;
-				case 1: ui.listCustomers() ; break ;
+				case 1: ui.listCustomers() ; break ; // kj85.kim: message chain
 				case 2: ui.listVideos() ; break ;
 				case 3: ui.register("customer") ; break ;
 				case 4: ui.register("video") ; break ;
@@ -120,9 +120,9 @@ public class VRUI {
 		for ( Customer customer: customers ) {
 			System.out.println("Name: " + customer.getName() +
 					"\tRentals: " + customer.getRentals().size()) ;
-			for ( Rental rental: customer.getRentals() ) {
-				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
-				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
+			for ( Rental rental: customer.getRentals() ) {  // kj85.kim: message chain
+				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;  // kj85.kim: message chain
+				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;  // kj85.kim: message chain
 			}
 		}
 		System.out.println("End of list");

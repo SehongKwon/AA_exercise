@@ -34,7 +34,7 @@ public class Rental {
 		return rentDate;
 	}
 
-	public void setRentDate(Date rentDate) {
+	public void setRentDate(Date rentDate) { // kj85.kim: dead code
 		this.rentDate = rentDate;
 	}
 
@@ -42,7 +42,7 @@ public class Rental {
 		return returnDate;
 	}
 
-	public void setReturnDate(Date returnDate) {
+	public void setReturnDate(Date returnDate) { // kj85.kim: dead code
 		this.returnDate = returnDate;
 	}
 

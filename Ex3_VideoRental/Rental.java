@@ -4,7 +4,7 @@ public class Rental {
 	private Video video ;
 	private int status ; // 0 for Rented, 1 for Returned
 	private Date rentDate ;
-	private Date returnDate ;
+	private Date returnDate ; // kj85.kim: temporary field
 
 	public Rental(Video video) {
 		this.video = video ;
@@ -25,7 +25,7 @@ public class Rental {
 	}
 
 	public void returnVideo() {
-		if ( status == 1 ) {
+		if ( status == 1 ) { // kj85.kim: temporary field
 			this.status = 1;
 			returnDate = new Date() ;
 		}

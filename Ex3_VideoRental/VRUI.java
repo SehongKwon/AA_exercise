@@ -20,28 +20,28 @@ public class VRUI {
                     quit = true;
                     break;
                 case 1:
-                    vRManager.listCustomers();
+                    ui.listCustomers();
                     break;
                 case 2:
-                    vRManager.listVideos();
+                    ui.listVideos();
                     break;
                 case 3:
-                    vRManager.registerCustomer();
+                    ui.registerCustomer();
                     break;
                 case 4:
-                    vRManager.registerVideo();
+                    ui.registerVideo();
                     break;
                 case 5:
-                    vRManager.rentVideo();
+                    ui.rentVideo();
                     break;
                 case 6:
-                    vRManager.returnVideo();
+                    ui.returnVideo();
                     break;
                 case 7:
-                    vRManager.getCustomerReport();
+                    ui.getCustomerReport();
                     break;
                 case 8:
-                    vRManager.clearRentals();
+                    ui.clearRentals();
                     break;
                 case -1:
                     ui.init();
@@ -69,6 +69,56 @@ public class VRUI {
 
         james.addRental(r1);
         james.addRental(r2);
+    }
+
+    public void listCustomers() {
+        System.out.println("List of customers");
+        vRManager.listCustomers();
+        System.out.println("End of list");
+    }
+
+    public void listVideos() {
+        System.out.println("List of videos");
+        vRManager.listVideos();
+        System.out.println("End of list");
+    }
+
+    public void registerCustomer() {
+        vRManager.registerCustomer(enterCustomerName());
+    }
+
+    public void registerVideo() {
+        System.out.println("Enter video title to register: ");
+        String title = scanner.next();
+
+        System.out.println("Enter video type( 1 for VHD, 2 for CD, 3 for DVD ):");
+        int videoType = scanner.nextInt();
+
+        System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
+        int priceCode = scanner.nextInt();
+
+        vRManager.registerVideo(title, videoType, priceCode);
+    }
+
+    public void rentVideo() {
+        vRManager.rentVideo(enterCustomerName());
+    }
+
+    public void returnVideo() {
+        vRManager.returnVideo(enterCustomerName());
+    }
+
+    public void getCustomerReport() {
+        vRManager.getCustomerReport(enterCustomerName());
+    }
+
+    public void clearRentals() {
+        vRManager.clearRentals(enterCustomerName());
+    }
+
+    private String enterCustomerName() {
+        System.out.println("Enter customer name: ");
+        return scanner.next();
     }
 
     public int showCommand() {

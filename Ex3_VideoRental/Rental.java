@@ -48,7 +48,12 @@ public class Rental {
 
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
-		int daysRented ;
+		if ( getDaysRented() <= 2) return limit ;
+		return video.getVideoType().getLimit();
+	}
+
+	public int getDaysRented() {
+		int daysRented;
 		if (getStatus() == 1) { // returned Video (*Comments)
 			long diff = returnDate.getTime() - rentDate.getTime();
 			//magic number
@@ -58,9 +63,6 @@ public class Rental {
 			//magic number
 			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1; //• Duplicate Code
 		}
-		if ( daysRented <= 2) return limit ;
-
-		
-		return video.getVideoType().getLimit();
+		return daysRented;
 	}
 }

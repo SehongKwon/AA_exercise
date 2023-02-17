@@ -61,6 +61,6 @@ public class Rental {
 		if ( daysRented <= 2) return limit ;
 
 		
-		return video.getVideoType().getLimit(); ;
+		return video.getVideoType().getLimit();
 	}
 }

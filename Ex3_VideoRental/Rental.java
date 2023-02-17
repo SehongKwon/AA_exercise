@@ -16,10 +16,6 @@ public class Rental {
 		return video;
 	}
 
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -29,21 +25,6 @@ public class Rental {
 			this.status = 1;
 			returnDate = new Date() ;
 		}
-	}
-	public Date getRentDate() {
-		return rentDate;
-	}
-
-	public void setRentDate(Date rentDate) { // kj85.kim: dead code
-		this.rentDate = rentDate;
-	}
-
-	public Date getReturnDate() {
-		return returnDate;
-	}
-
-	public void setReturnDate(Date returnDate) { // kj85.kim: dead code
-		this.returnDate = returnDate;
 	}
 
 	public int getDaysRentedLimit() {

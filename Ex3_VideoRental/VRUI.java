@@ -21,15 +21,15 @@ public class VRUI {
                     break;
                 case 1:
                     vRManager.listCustomers();
-                    break; // kj85.kim: message chain
+                    break;
                 case 2:
                     vRManager.listVideos();
                     break;
                 case 3:
-                    vRManager.register("customer");
+                    vRManager.registerCustomer();
                     break;
                 case 4:
-                    vRManager.register("video");
+                    vRManager.registerVideo();
                     break;
                 case 5:
                     vRManager.rentVideo();
@@ -71,23 +71,23 @@ public class VRUI {
         james.addRental(r2);
     }
 
-	public int showCommand() {
-		//Substituted Algorithm start
-		System.out.println("\nSelect a command !");
-		System.out.println("\t 0. Quit");
-		System.out.println("\t 1. List customers");
-		System.out.println("\t 2. List videos");
-		System.out.println("\t 3. Register customer");
-		System.out.println("\t 4. Register video");
-		System.out.println("\t 5. Rent video");
-		System.out.println("\t 6. Return video");
-		System.out.println("\t 7. Show customer report");
-		System.out.println("\t 8. Show customer and clear rentals");
-		//end
-		
-		int command = scanner.nextInt() ;
+    public int showCommand() {
+        //Substituted Algorithm start
+        System.out.println("\nSelect a command !");
+        System.out.println("\t 0. Quit");
+        System.out.println("\t 1. List customers");
+        System.out.println("\t 2. List videos");
+        System.out.println("\t 3. Register customer");
+        System.out.println("\t 4. Register video");
+        System.out.println("\t 5. Rent video");
+        System.out.println("\t 6. Return video");
+        System.out.println("\t 7. Show customer report");
+        System.out.println("\t 8. Show customer and clear rentals");
+        //end
 
-		return command ;
+        int command = scanner.nextInt();
 
-	}
+        return command;
+
+    }
 }

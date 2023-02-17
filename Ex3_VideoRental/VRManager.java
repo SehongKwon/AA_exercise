@@ -130,6 +130,7 @@ public class VRManager {
         System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
         int priceCode = scanner.nextInt();
 
-        videos.add(new Video(title, videoType, priceCode, new Date()));
+        Video video = new Video(title, VideoFactory.create(videoType), priceCode, new Date());
+        videos.add(video);
     }
 }

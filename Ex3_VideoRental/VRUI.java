@@ -59,8 +59,8 @@ public class VRUI {
         vRManager.customers.add(james);
         vRManager.customers.add(brown);
 
-        Video v1 = new Video("v1", Video.CD, Video.REGULAR, new Date());
-        Video v2 = new Video("v2", Video.DVD, Video.NEW_RELEASE, new Date());
+        Video v1 = new Video("v1", VideoFactory.create(2), Video.REGULAR, new Date());
+        Video v2 = new Video("v2", VideoFactory.create(3), Video.NEW_RELEASE, new Date());
         vRManager.videos.add(v1);
         vRManager.videos.add(v2);
 

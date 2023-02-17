@@ -17,12 +17,8 @@ public class VRManager {
         if (foundCustomer == null) {
             System.out.println("No customer found");
         } else {
-            System.out.println("Name: " + foundCustomer.getName() +
-                    "\tRentals: " + foundCustomer.getRentals().size());
-            for (Rental rental : foundCustomer.getRentals()) {
-                System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ");
-                System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode());
-            }
+            listCustomer(foundCustomer);
+            foundCustomer.listRentals();
 
             List<Rental> rentals = new ArrayList<Rental>();
             foundCustomer.setRentals(rentals);
@@ -72,14 +68,14 @@ public class VRManager {
     public void listCustomers() {
         System.out.println("List of customers");
         for (Customer customer : customers) {
-            System.out.println("Name: " + customer.getName() +
-                    "\tRentals: " + customer.getRentals().size());
-            for (Rental rental : customer.getRentals()) {  // kj85.kim: message chain
-                System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ");  // kj85.kim: message chain
-                System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode());  // kj85.kim: message chain
-            }
+            listCustomer(customer);
+            customer.listRentals();
         }
         System.out.println("End of list");
+    }
+
+    private static void listCustomer(Customer customer) {
+        System.out.println("Name: " + customer.getName() + "\tRentals: " + customer.getRentals().size());
     }
 
     public void getCustomerReport() {
@@ -121,9 +117,7 @@ public class VRManager {
 
     public void registerCustomer() {
         System.out.println("Enter customer name: ");
-        String name = scanner.next();
-        Customer customer = new Customer(name);
-        customers.add(customer);
+        customers.add(new Customer(scanner.next()));
     }
 
     public void registerVideo() {
@@ -136,8 +130,7 @@ public class VRManager {
         System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
         int priceCode = scanner.nextInt();
 
-        Date registeredDate = new Date();
-        Video video = new Video(title, VideoFactory.create(videoType), priceCode, registeredDate);
+        Video video = new Video(title, VideoFactory.create(videoType), priceCode, new Date());
         videos.add(video);
     }
 }

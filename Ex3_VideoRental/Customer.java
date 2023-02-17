@@ -93,4 +93,11 @@ public class Customer {
 		}
 		return result ;
 	}
+
+	void listRentals() {
+		for (Rental rental : getRentals()) {
+			System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ");
+			System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode());
+		}
+	}
 }

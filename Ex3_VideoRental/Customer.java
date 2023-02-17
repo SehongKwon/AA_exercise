@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class Customer {
@@ -24,7 +23,7 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public void clearReantals(){
+    public void clearReantals() {
         this.rentals.clear();
     }
 
@@ -45,8 +44,8 @@ public class Customer {
             int daysRented = 0;
 
             daysRented = each.getDaysRented();
-            eachCharge = getEachCharge(each, eachCharge, daysRented);
-            eachPoint = getEachPoint(each, eachPoint, daysRented);
+            eachCharge = each.getEachCharge(eachCharge, daysRented);
+            eachPoint = each.getEachPoint(eachPoint, daysRented);
 
             result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
                     + "\tPoint: " + eachPoint + "\n";
@@ -56,39 +55,18 @@ public class Customer {
 
         result += "Total charge: " + totalCharge + "\tTotal Point:" + totalPoint + "\n";
 
+        showFreeCouponInfo(totalPoint);
 
+        return result;
+    }
+
+    private static void showFreeCouponInfo(int totalPoint) {
         if (totalPoint >= 10) {//magic number
             System.out.println("Congrat! You earned one free coupon");
         }
         if (totalPoint >= 30) {//magic number
             System.out.println("Congrat! You earned two free coupon");
         }
-        return result;
-    }
-
-    private static double getEachCharge(Rental each, double eachCharge, int daysRented) {
-        switch (each.getVideo().getPriceCode()) {
-            case Video.REGULAR: //Feature Envy
-                eachCharge += 2;
-                if (daysRented > 2)
-                    eachCharge += (daysRented - 2) * 1.5; // magic number
-                break;
-            case Video.NEW_RELEASE: //Feature Envy
-                eachCharge = daysRented * 3;
-                break;
-        }
-        return eachCharge;
-    }
-
-    private static int getEachPoint(Rental each, int eachPoint, int daysRented) {
-        eachPoint++;
-
-        if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE))
-            eachPoint++;
-
-        if (daysRented > each.getDaysRentedLimit())
-            eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty());
-        return eachPoint;
     }
 
     void listRentals() {

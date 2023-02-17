@@ -12,6 +12,31 @@ public class Rental {
         rentDate = new Date();
     }
 
+    public double getEachCharge(double eachCharge, int daysRented) {
+        switch (getVideo().getPriceCode()) {
+            case Video.REGULAR: //Feature Envy
+                eachCharge += 2;
+                if (daysRented > 2)
+                    eachCharge += (daysRented - 2) * 1.5; // magic number
+                break;
+            case Video.NEW_RELEASE: //Feature Envy
+                eachCharge = daysRented * 3;
+                break;
+        }
+        return eachCharge;
+    }
+
+    public int getEachPoint(int eachPoint, int daysRented) {
+        eachPoint++;
+
+        if ((getVideo().getPriceCode() == Video.NEW_RELEASE))
+            eachPoint++;
+
+        if (daysRented > getDaysRentedLimit())
+            eachPoint -= Math.min(eachPoint, getVideo().getLateReturnPointPenalty());
+        return eachPoint;
+    }
+
     public Video getVideo() {
         return video;
     }

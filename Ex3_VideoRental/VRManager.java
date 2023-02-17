@@ -11,8 +11,8 @@ public class VRManager {
     public VRManager() {
     }
 
-    public void clearRentals() {
-        Customer foundCustomer = getCustomerName();
+    public void clearRentals(String customerName) {
+        Customer foundCustomer = getCustomerName(customerName);
 
         if (foundCustomer == null) {
             System.out.println("No customer found");
@@ -25,8 +25,8 @@ public class VRManager {
         }
     }
 
-    public void returnVideo() {
-        Customer foundCustomer = getCustomerName();
+    public void returnVideo(String customerName) {
+        Customer foundCustomer = getCustomerName(customerName);
         if (foundCustomer == null) return;
 
         System.out.println("Enter video title to return: ");
@@ -42,10 +42,7 @@ public class VRManager {
         }
     }
 
-    Customer getCustomerName() {
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.next();
-
+    Customer getCustomerName(String customerName) {
         Customer foundCustomer = null;
         for (Customer customer : customers) {
             if (customer.getName().equals(customerName)) {
@@ -57,29 +54,24 @@ public class VRManager {
     }
 
     public void listVideos() {
-        System.out.println("List of videos");
-
         for (Video video : videos) {
             System.out.println("Price code: " + video.getPriceCode() + "\tTitle: " + video.getTitle());
         }
-        System.out.println("End of list");
     }
 
     public void listCustomers() {
-        System.out.println("List of customers");
         for (Customer customer : customers) {
             listCustomer(customer);
             customer.listRentals();
         }
-        System.out.println("End of list");
     }
 
     private static void listCustomer(Customer customer) {
         System.out.println("Name: " + customer.getName() + "\tRentals: " + customer.getRentals().size());
     }
 
-    public void getCustomerReport() {
-        Customer foundCustomer = getCustomerName();
+    public void getCustomerReport(String customerName) {
+        Customer foundCustomer = getCustomerName(customerName);
 
         if (foundCustomer == null) {
             System.out.println("No customer found");
@@ -89,8 +81,8 @@ public class VRManager {
         }
     }
 
-    public void rentVideo() {
-        Customer foundCustomer = getCustomerName();
+    public void rentVideo(String customerName) {
+        Customer foundCustomer = getCustomerName(customerName);
 
         if (foundCustomer == null) return;
 
@@ -115,22 +107,11 @@ public class VRManager {
         foundCustomer.setRentals(customerRentals);
     }
 
-    public void registerCustomer() {
-        System.out.println("Enter customer name: ");
-        customers.add(new Customer(scanner.next()));
+    public void registerCustomer(String customerName) {
+        customers.add(new Customer(customerName));
     }
 
-    public void registerVideo() {
-        System.out.println("Enter video title to register: ");
-        String title = scanner.next();
-
-        System.out.println("Enter video type( 1 for VHD, 2 for CD, 3 for DVD ):");
-        int videoType = scanner.nextInt();
-
-        System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
-        int priceCode = scanner.nextInt();
-
-        Video video = new Video(title, VideoFactory.create(videoType), priceCode, new Date());
-        videos.add(video);
+    public void registerVideo(String title, int videoType, int priceCode) {
+        videos.add(new Video(title, VideoFactory.create(videoType), priceCode, new Date()));
     }
 }

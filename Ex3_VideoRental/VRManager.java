@@ -137,7 +137,7 @@ public class VRManager {
         int priceCode = scanner.nextInt();
 
         Date registeredDate = new Date();
-        Video video = new Video(title, videoType, priceCode, registeredDate);
+        Video video = new Video(title,  VideoFactory.create(videoType), priceCode, registeredDate);
         videos.add(video);
     }
 }

@@ -32,10 +32,6 @@ public class Customer {
         return Collections.unmodifiableList(rentals);
     }
 
-    public void removeRental(Rental rental) {
-        rentals.remove(rental);
-    }
-
     //Long Method (Code Smell)
     public String getReport() {
         String result = "Customer Report for " + getName() + "\n";

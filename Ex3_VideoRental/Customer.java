@@ -45,40 +45,14 @@ public class Customer {
 			double eachCharge = 0;
 			int eachPoint = 0 ;
 			int daysRented = 0;
-			
-			
-			if (each.getStatus() == 1) { // returned Video (*Comments)
-				long diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
-				daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1; //duplicate code & //magic number
-			} else { // not yet returned (*Comments)
-				long diff = new Date().getTime() - each.getRentDate().getTime();
-				daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1; //duplicate code & //magic number
-			}
 
-			switch (each.getVideo().getPriceCode()) {
-			case Video.REGULAR: //Feature Envy
-				eachCharge += 2;
-				if (daysRented > 2)
-					eachCharge += (daysRented - 2) * 1.5; // magic number
-				break;
-			case Video.NEW_RELEASE: //Feature Envy
-				eachCharge = daysRented * 3;
-				break;
-			}
-
-			eachPoint++;
-
-			if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE) )
-				eachPoint++;
-
-			if ( daysRented > each.getDaysRentedLimit() )
-				eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty()) ;
+			daysRented = getDaysRented(each);
+			eachCharge = getEachCharge(each, eachCharge, daysRented);
+			eachPoint = getEachPoint(each, eachPoint, daysRented);
 
 			result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
 					+ "\tPoint: " + eachPoint + "\n";
-
 			totalCharge += eachCharge;
-
 			totalPoint += eachPoint ;
 		}
 
@@ -92,6 +66,43 @@ public class Customer {
 			System.out.println("Congrat! You earned two free coupon");
 		}
 		return result ;
+	}
+
+	private static double getEachCharge(Rental each, double eachCharge, int daysRented) {
+		switch (each.getVideo().getPriceCode()) {
+		case Video.REGULAR: //Feature Envy
+			eachCharge += 2;
+			if (daysRented > 2)
+				eachCharge += (daysRented - 2) * 1.5; // magic number
+			break;
+		case Video.NEW_RELEASE: //Feature Envy
+			eachCharge = daysRented * 3;
+			break;
+		}
+		return eachCharge;
+	}
+
+	private static int getDaysRented(Rental each) {
+		int daysRented;
+		if (each.getStatus() == 1) { // returned Video (*Comments)
+			long diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
+			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1; //duplicate code & //magic number
+		} else { // not yet returned (*Comments)
+			long diff = new Date().getTime() - each.getRentDate().getTime();
+			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1; //duplicate code & //magic number
+		}
+		return daysRented;
+	}
+
+	private static int getEachPoint(Rental each, int eachPoint, int daysRented) {
+		eachPoint++;
+
+		if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE) )
+			eachPoint++;
+
+		if ( daysRented > each.getDaysRentedLimit() )
+			eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty()) ;
+		return eachPoint;
 	}
 
 	void listRentals() {
